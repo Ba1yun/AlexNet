@@ -17,6 +17,7 @@ def main():
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     print("using {} device.".format(device))
 
+#弄一个训练和测试字典
     data_transform = {
         "train": transforms.Compose([transforms.RandomResizedCrop(224),
                                      transforms.RandomHorizontalFlip(),
@@ -28,9 +29,9 @@ def main():
 
     #data_root = os.path.abspath(os.path.join(os.getcwd(), "../.."))  # get data root path
     data_root = os.path.abspath(os.getcwd())
-    print(data_root)
+    #print(data_root)
     image_path = os.path.join(data_root, "data_set", "flower_data")  # flower data set path
-    print(image_path)
+    #print(image_path)
     assert os.path.exists(image_path), "{} path does not exist.".format(image_path)
     train_dataset = datasets.ImageFolder(root=os.path.join(image_path, "train"),
                                          transform=data_transform["train"])
@@ -152,4 +153,6 @@ if __name__ == '__main__':
 15.os.path.abspath(path) 返回 path 参数的绝对路径的字符串
 16.os.path.abspath(),就是把路径转化成绝对路径格式的字符串形式，如果用join等操作后不用这个函数就会导致路径格式不对电脑找不到这个路径
 17.os.path.join(),对于目录和子目录那么join后是大目录如os.path.abspath(os.path.join('E:\B\AlexNet','E:\B'))结果是E:\B
+18.datasets.ImageFolder（）是一个图像数据库处理的函数，就是在该文件下要放训练和验证的数据集的类文件然后类文件下面是类图片（自己做数据集使用）
+19.train_dataset继承了datasets.ImageFolder,所以可以直接调用class_to_idx
 '''
